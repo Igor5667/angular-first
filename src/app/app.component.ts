@@ -5,11 +5,13 @@ import { RouterOutlet } from '@angular/router';
 import { Task } from './Types';
 import { v4 as id } from 'uuid';
 import { AddComponent } from './add/add.component';
+import { ListComponent } from './list/list.component';
+import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, NgFor, AddComponent],
+  imports: [RouterOutlet, NgIf, NgFor, AddComponent, ListComponent],
   // templateUrl: './app.component.html',
   template: `
     <div class="flex flex-col mt-10 items-center h-screen ">
@@ -24,21 +26,14 @@ import { AddComponent } from './add/add.component';
 
       <app-add (submitText)="addTask($event)" />
 
-      <ul class="border-green-400 my-3">
-        <li
-          *ngFor="let item of listOfTasks"
-          class="w-60 flex justify-between border-b border-y-green-950 mb-4 hover:bg-emerald-200 rounded-t-md"
-        >
-          <label [for]="item.id">{{ item.name }}</label>
-          <input [id]="item.id" type="checkbox" class="ms-auto me-3" />
-          <button (click)="deleteItem(item)">🗑️</button>
-        </li>
-      </ul>
+      <app-list [listOfTasks]="listOfTasks" (deleteItem)="deleteItem($event)"/>
+
+      
 
       <button (click)="hideParagraph()" class="buttons text-xs">
         {{ isShown ? 'Hide' : 'Show' }} first text
       </button>
-      
+
     </div>
   `,
   styleUrl: './app.component.scss',
@@ -57,6 +52,7 @@ export class AppComponent {
   }
 
   addTask(input: HTMLInputElement) {
+    if(input.value==""){return}
     this.listOfTasks.push({ id: id(), name: input.value, done: false });
     input.value = '';
   }

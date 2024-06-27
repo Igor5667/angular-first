@@ -1,0 +1,13 @@
+<ul class="border-green-400 my-3">
+    <li
+      *ngFor="let item of listOfTasks"
+      class="w-60 flex justify-between border-b border-y-green-950 mb-4 hover:bg-emerald-200 rounded-t-md"
+    >
+      <label [for]="item.id">{{ item.name }}</label>
+      <input [id]="item.id" type="checkbox" class="ms-auto me-3" />
+      <button (click)="deleteItem.emit(item)" >🗑️</button>
+    </li>
+  </ul>
+<!-- 
+ 
+-->
