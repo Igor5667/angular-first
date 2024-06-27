@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .buttons {
+    @apply bg-emerald-300 border-2 border-emerald-700 rounded-md
+            p-2 hover:bg-emerald-400;
+  }
+}
+
+body {
+  background-color: #c9fff3;
+}
