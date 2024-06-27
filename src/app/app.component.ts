@@ -12,30 +12,7 @@ import { isEmpty } from 'rxjs';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NgIf, NgFor, AddComponent, ListComponent],
-  // templateUrl: './app.component.html',
-  template: `
-    <div class="flex flex-col mt-10 items-center h-screen ">
-
-      <p *ngIf="isShown" class="text-lime-900 text-xs">
-        Very first angular project
-      </p>
-
-      <h1 class="main-header text-4xl font-bold text-lime-800 mb-5">
-        To do list:
-      </h1>
-
-      <app-add (submitText)="addTask($event)" />
-
-      <app-list [listOfTasks]="listOfTasks" (deleteItem)="deleteItem($event)"/>
-
-      
-
-      <button (click)="hideParagraph()" class="buttons text-xs">
-        {{ isShown ? 'Hide' : 'Show' }} first text
-      </button>
-
-    </div>
-  `,
+  templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
